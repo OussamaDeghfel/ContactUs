@@ -1,44 +1,22 @@
 import { useState } from "react";
-import { useFormik } from "formik";
 
 function App() {
 
-  const validateInfo = infoData => {
-    const errors = {}
 
-    if(!infoData.firstName){
-      errors.firstName = "PLease enter your FirstName"
-    }
-
-    return errors
-  }
-
-  const InfoComponent = () => {
-    const Formik = useFormik({
-      initialValues: {
-        firstName: "",
-      },
-      validate: validateInfo,
-      onSubmit : values => {
-        alert(JSON.stringify(values))
-      }
-    })
-  }
+  
 
   return (
     <>
       <div className="shadow-md rounded-lg h-[600px] w-[600px] bg-white m-auto">
         <div className="m-5 p-2">
           <h1 className="font-bold text-2xl py-2">Contact Us</h1>
-          <form onSubmit={Formik.handleSubmit}>
+          <form>
             <div className="flex">
               <div className="flex flex-col">
                 <label className="py-2">First Name</label>
                 <input
                   type="text"
                   id="firstName"
-                  onChange={Formik.handleChange}
-                  value={Formik.values.id}
                   className="cursor-pointer py-2 border-2 w-[262px] border-gray-400 rounded-md flex-wrap"
                 />
               </div>
