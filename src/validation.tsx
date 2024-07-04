@@ -19,5 +19,9 @@ export default function Validation(values: any) {
         errors.email = "Please enter a valid email"
     }
 
+    if(values.message === ""){
+        errors.message = "Message is required"
+    }
+
     return errors;
 }
