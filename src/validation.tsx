@@ -1,3 +1,4 @@
+
 export default function Validation(values: any, radio:any, check: any) {
     const errors = {}
 
@@ -30,8 +31,6 @@ export default function Validation(values: any, radio:any, check: any) {
     if(!check){
         errors.check = "To submit this form, Please consent to being contacted"
     }
-
-    
 
     return errors;
 }

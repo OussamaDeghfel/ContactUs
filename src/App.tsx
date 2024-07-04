@@ -1,5 +1,6 @@
 import { useState } from "react";
 import validation from "./validation";
+import toast from "react-hot-toast";
 
 function App() {
   // const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -13,6 +14,7 @@ function App() {
   const [errors, setErrors] = useState({});
   const [radio, setRadio] = useState();
   const [check, setCheck] = useState();
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   function handleChange(e: any) {
     const newObj = { ...values, [e.target.name]: e.target.value };
@@ -21,7 +23,13 @@ function App() {
 
   function validateForm(e) {
     e.preventDefault();
-    setErrors(validation(values, radio, check));
+    const allError = validation(values, radio, check);
+    setErrors(allError);
+
+    if(Object.keys(allError).length === 0) {
+      setIsSubmitted(true)
+      toast.success("Form submitted successfully")
+    }
   }
 
   return (
@@ -114,6 +122,7 @@ function App() {
                   rows="4"
                   cols="50"
                   className="p-2 border-2 border-gray-400 rounded-md flex-wrap focus:outline-none focus:border-green-700"
+                  onChange={handleChange}
                 />
                 {errors.message && (
                   <span className="text-red-500">{errors.message}</span>
@@ -138,6 +147,7 @@ function App() {
               >
                 Submit
               </button>
+              {isSubmitted && <p className="text-green-700">Message sent</p>}
             </div>
           </form>
         </div>
