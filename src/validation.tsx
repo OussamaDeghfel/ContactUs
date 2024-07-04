@@ -1,4 +1,4 @@
-export default function Validation(values: any) {
+export default function Validation(values: any, radio:any) {
     const errors = {}
 
     // const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -22,6 +22,12 @@ export default function Validation(values: any) {
     if(values.message === ""){
         errors.message = "Message is required"
     }
+
+    if(!radio){
+        errors.radio = "Please select a radio button"
+    }
+
+    
 
     return errors;
 }

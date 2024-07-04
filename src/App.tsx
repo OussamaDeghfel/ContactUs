@@ -9,11 +9,11 @@ function App() {
     lastname: "",
     email: "",
     message: "",
-    general: false,
-    support: false
+    general: "",
+    support: "",
   });
   const [errors, setErrors] = useState({});
-  const [radioBtn, setRadioBtn] = useState(false);
+  const [radio, setRadio] = useState();
 
   function handleChange(e: any) {
     const newObj = { ...values, [e.target.name]: e.target.value };
@@ -22,12 +22,12 @@ function App() {
 
   function validateForm(e) {
     e.preventDefault();
-    setErrors(validation(values));
+    setErrors(validation(values, radio));
   }
 
   return (
     <>
-      <div className="shadow-md rounded-lg h-[600px] w-[600px] bg-white m-auto">
+      <div className="shadow-md rounded-lg h-full w-[600px] bg-white m-auto">
         <div className="m-5 p-2">
           <h1 className="font-bold text-2xl py-2">Contact Us</h1>
           <form onSubmit={validateForm}>
@@ -77,8 +77,9 @@ function App() {
                     <input
                       type="radio"
                       name="general"
+                      value="general"
                       className="accent-green-700"
-                      onClick={() => setRadioBtn(true)}
+                      onChange={(e) => setRadio(e.target.value)}
                     />{" "}
                     <span className="px-4">General Enquiry</span>
                   </label>
@@ -93,12 +94,17 @@ function App() {
                     <span className="px-4">Support Request</span>
                   </label>
                 </div>
-
+                
                 {/* <input type="radio" id="html" name="fav_language" value="HTML" />
                 <label htmlFor="html">HTML</label>
                 <input type="radio" id="css" name="fav_language" value="CSS" />
                 <label htmlFor="css">CSS</label> */}
               </div>
+              {errors.radio && (
+                  <span className="text-red-500">{errors.radio}</span>
+                )}
+            </div>
+            <div>
               <div className="flex flex-col">
                 <label htmlFor="textmessage" className="my-2">
                   Message
@@ -113,12 +119,16 @@ function App() {
                   <span className="text-red-500">{errors.message}</span>
                 )}
               </div>
+            </div>
+            <div>
               <div className="flex my-4">
                 <input type="checkbox" className="accent-green-700" />
                 <label className="mx-2">
                   I consent to be contacted by the team{" "}
                 </label>
               </div>
+            </div>
+            <div>
               <button
                 type="submit"
                 className="w-full text-center bg-green-700 rounded-md text-white p-2 mt-2 focus:outline-none focus:border-green-700"
