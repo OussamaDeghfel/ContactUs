@@ -90,6 +90,7 @@ function App() {
                       type="radio"
                       name="support"
                       className="accent-green-700"
+                      onChange={(e) => setRadio(e.target.value)}
                     />{" "}
                     <span className="px-4">Support Request</span>
                   </label>
