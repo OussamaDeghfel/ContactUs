@@ -9,11 +9,10 @@ function App() {
     lastname: "",
     email: "",
     message: "",
-    general: "",
-    support: "",
   });
   const [errors, setErrors] = useState({});
   const [radio, setRadio] = useState();
+  const [check, setCheck] = useState();
 
   function handleChange(e: any) {
     const newObj = { ...values, [e.target.name]: e.target.value };
@@ -22,7 +21,7 @@ function App() {
 
   function validateForm(e) {
     e.preventDefault();
-    setErrors(validation(values, radio));
+    setErrors(validation(values, radio, check));
   }
 
   return (
@@ -123,7 +122,7 @@ function App() {
             </div>
             <div>
               <div className="flex my-4">
-                <input type="checkbox" className="accent-green-700" />
+                <input type="checkbox" value="checkbox" onChange={(e) => setCheck(e.target.value)} className="accent-green-700" />
                 <label className="mx-2">
                   I consent to be contacted by the team{" "}
                 </label>
