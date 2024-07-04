@@ -20,7 +20,7 @@ export default function Validation(values: any, radio:any, check: any) {
     }
 
     if(values.message === ""){
-        errors.message = "this field is required"
+        errors.message = "This field is required"
     }
 
     if(!radio){

@@ -121,12 +121,15 @@ function App() {
               </div>
             </div>
             <div>
-              <div className="flex my-4">
+              <div className="flex my-2">
                 <input type="checkbox" value="checkbox" onChange={(e) => setCheck(e.target.value)} className="accent-green-700" />
                 <label className="mx-2">
                   I consent to be contacted by the team{" "}
                 </label>
               </div>
+              {errors.check && (
+                <span className="text-red-500">{errors.check}</span>
+              )}
             </div>
             <div>
               <button
