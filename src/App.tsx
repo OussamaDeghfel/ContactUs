@@ -1,6 +1,7 @@
 import { useState } from "react";
 import validation from "./validation";
 import toast from "react-hot-toast";
+import Success from "./Success";
 
 function App() {
   // const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -14,7 +15,7 @@ function App() {
   const [errors, setErrors] = useState({});
   const [radio, setRadio] = useState();
   const [check, setCheck] = useState();
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleChange(e: any) {
     const newObj = { ...values, [e.target.name]: e.target.value };
@@ -26,9 +27,8 @@ function App() {
     const allError = validation(values, radio, check);
     setErrors(allError);
 
-    if(Object.keys(allError).length === 0) {
-      setIsSubmitted(true)
-      toast.success("Form submitted successfully")
+    if (Object.keys(allError).length === 0) {
+      setIsSubmitted(true);
     }
   }
 
@@ -102,15 +102,10 @@ function App() {
                     <span className="px-4">Support Request</span>
                   </label>
                 </div>
-                
-                {/* <input type="radio" id="html" name="fav_language" value="HTML" />
-                <label htmlFor="html">HTML</label>
-                <input type="radio" id="css" name="fav_language" value="CSS" />
-                <label htmlFor="css">CSS</label> */}
               </div>
               {errors.radio && (
-                  <span className="text-red-500">{errors.radio}</span>
-                )}
+                <span className="text-red-500">{errors.radio}</span>
+              )}
             </div>
             <div>
               <div className="flex flex-col">
@@ -131,7 +126,12 @@ function App() {
             </div>
             <div>
               <div className="flex my-2">
-                <input type="checkbox" value="checkbox" onChange={(e) => setCheck(e.target.value)} className="accent-green-700" />
+                <input
+                  type="checkbox"
+                  value="checkbox"
+                  onChange={(e) => setCheck(e.target.value)}
+                  className="accent-green-700"
+                />
                 <label className="mx-2">
                   I consent to be contacted by the team{" "}
                 </label>
@@ -147,11 +147,11 @@ function App() {
               >
                 Submit
               </button>
-              {isSubmitted && <p className="text-green-700">Message sent</p>}
             </div>
           </form>
         </div>
       </div>
+      <div className="flex justify-center items-center top-0">{isSubmitted && <Success />}</div>
     </>
   );
 }
