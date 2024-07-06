@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import validation from "./validation";
 import toast from "react-hot-toast";
 import Success from "./Success";
@@ -16,6 +16,9 @@ function App() {
   const [radio, setRadio] = useState();
   const [check, setCheck] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [timeOut, setTimeOut] = useState(null)
+
+
 
   function handleChange(e: any) {
     const newObj = { ...values, [e.target.name]: e.target.value };
@@ -30,7 +33,16 @@ function App() {
     if (Object.keys(allError).length === 0) {
       setIsSubmitted(true);
     }
+
+    if (timeOut) {
+      clearTimeout(timeOut);
+    }
+
+    const newTimeoutId = setTimeout(() => setIsSubmitted(false), 2000);
+    setTimeOut(newTimeoutId);
   }
+
+  useEffect( () => () => clearTimeout(timeOut), [timeOut] )
 
   return (
     <>
@@ -151,7 +163,7 @@ function App() {
           </form>
         </div>
       </div>
-      <div className="flex justify-center items-center top-0">{isSubmitted && <Success />}</div>
+      <div className="absolute flex z-10 w-[450px]  justify-center items-center top-0 left-1/2 -translate-x-1/2 translate-y-0 ">{isSubmitted && <Success />}</div>
     </>
   );
 }
