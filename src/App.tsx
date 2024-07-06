@@ -16,7 +16,7 @@ function App() {
   const [radio, setRadio] = useState();
   const [check, setCheck] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [timeOut, setTimeOut] = useState(null)
+  const [timeIsOut, setTimeIsOut] = useState(null)
 
 
 
@@ -34,15 +34,10 @@ function App() {
       setIsSubmitted(true);
     }
 
-    if (timeOut) {
-      clearTimeout(timeOut);
-    }
-
-    const newTimeoutId = setTimeout(() => setIsSubmitted(false), 2000);
-    setTimeOut(newTimeoutId);
-  }
-
-  useEffect( () => () => clearTimeout(timeOut), [timeOut] )
+    setTimeout(() => {
+      setIsSubmitted(false)
+    }, 2000);
+  }  
 
   return (
     <>
