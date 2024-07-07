@@ -16,9 +16,6 @@ function App() {
   const [radio, setRadio] = useState();
   const [check, setCheck] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [timeIsOut, setTimeIsOut] = useState(null)
-
-
 
   function handleChange(e: any) {
     const newObj = { ...values, [e.target.name]: e.target.value };
@@ -35,13 +32,13 @@ function App() {
     }
 
     setTimeout(() => {
-      setIsSubmitted(false)
+      setIsSubmitted(false);
     }, 2000);
-  }  
+  }
 
   return (
     <>
-      <div className="shadow-md rounded-lg h-full w-[600px] bg-white m-auto">
+      {/* <div className="shadow-md rounded-lg h-full w-[600px] bg-white m-auto">
         <div className="m-5 p-2">
           <h1 className="font-bold text-2xl py-2">Contact Us</h1>
           <form onSubmit={validateForm}>
@@ -158,7 +155,117 @@ function App() {
           </form>
         </div>
       </div>
-      <div className="absolute flex z-10 w-[450px]  justify-center items-center top-0 left-1/2 -translate-x-1/2 translate-y-0 ">{isSubmitted && <Success />}</div>
+      <div className="absolute flex z-10 w-[450px]  justify-center items-center top-0 left-1/2 -translate-x-1/2 translate-y-0 ">
+        {isSubmitted && <Success />}
+      </div> */}
+
+      <div className="m-auto h-full w-[300px] md:w-[550px] bg-white rounded-md shadow-lg p-6">
+        <h1 className="font-bold text-xl">Contact Us</h1>
+        <form className="mt-4" onSubmit={validateForm}>
+          <div className="grid gap-2 md:flex ">
+            <div>
+              <label htmlFor="firstName">First Name *</label>
+              <input
+                type="text"
+                name="firstname"
+                className="border-2 border-gray-500 rounded-md p-2 mt-2 w-full cursor-pointer focus:border-green-800 focus:outline-none"
+                onChange={handleChange}
+              />
+              {errors.firstname && (
+                <span className="text-red-500">{errors.firstname}</span>
+              )}
+            </div>
+            <div>
+              <label htmlFor="lastName">Last Name *</label>
+              <input
+                type="text"
+                name="lastname"
+                className="border-2 border-gray-500 rounded-md p-2 mt-2 w-full cursor-pointer focus:border-green-800 focus:outline-none"
+                onChange={handleChange}
+              />
+              {errors.lastname && (
+                <span className="text-red-500">{errors.lastname}</span>
+              )}
+            </div>
+          </div>
+          <div className="mt-2 md:mt-4">
+            <label htmlFor="EmailAddress">Email Address *</label>
+            <input
+              type="text"
+              name="email"
+              className="border-2 border-gray-500 rounded-md p-2 mt-2 w-full cursor-pointer focus:border-green-800 focus:outline-none"
+              onChange={handleChange}
+            />
+            {errors.email && (
+              <span className="text-red-500">{errors.email}</span>
+            )}
+          </div>
+          <div className="mt-2 md:mt-4">
+            <span>Query Type *</span>
+            <div className="md:flex md:gap-x-2">
+              <button className="border-2 border-gray-500 rounded-md p-2 mt-2 w-full text-start focus:border-green-800 focus:outline-none">
+                <input
+                  type="radio"
+                  name="general"
+                  onChange={(e) => setRadio(e.target.value)}
+                />
+                <span className="px-2">General Enquiry</span>
+              </button>
+              <button className="border-2 border-gray-500 rounded-md p-2 mt-2 w-full text-start focus:border-green-800 focus:outline-none">
+                <input
+                  type="radio"
+                  name="support"
+                  onChange={(e) => setRadio(e.target.value)}
+                />
+                <span className="px-2">Support Request</span>
+              </button>
+            </div>
+            {errors.radio && (
+              <span className="text-red-500">{errors.radio}</span>
+            )}
+          </div>
+          <div className="grid mt-2 md:mt-4">
+            <label htmlFor="message">Message *</label>
+            <textarea
+              name="message"
+              cols={40}
+              rows={5}
+              className="p-2 rounded-md border-2 border-gray-500 focus:border-green-800 focus:outline-none"
+              onChange={handleChange}
+            />
+            {errors.message && (
+              <span className="text-red-500">{errors.message}</span>
+            )}
+          </div>
+          <div className="grid mt-2 md:mt-4">
+            <div className="md:flex">
+              <input
+                type="checkbox"
+                className="accent-green-800"
+                value="checkbox"
+                onChange={(e) => setCheck(e.target.value)}
+              />
+              <label className="ml-2">
+                I consent to being contacted by the team *
+              </label>
+            </div>
+            {errors.check && (
+              <span className="text-red-500">{errors.check}</span>
+            )}
+          </div>
+          <div className="mt-2 md:mt-4">
+            <button
+              type="submit"
+              className="w-full bg-green-800 rounded-md text-white text-center py-2"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      <div className="absolute flex z-10 w-[450px]  justify-center items-center top-0 left-1/2 -translate-x-1/2 translate-y-0 ">
+        {isSubmitted && <Success />}
+      </div>
     </>
   );
 }
